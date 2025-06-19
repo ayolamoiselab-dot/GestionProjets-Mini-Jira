@@ -64,3 +64,35 @@ bin/
 *.settings/
 nbproject/private/
 out/
+
+# Secrets & credentials
+.env
+.env.*
+*.env
+*.env.*
+*.secret
+*.key
+*.pem
+*.p12
+*.crt
+*.der
+*.jks
+*.keystore
+*.pfx
+*.p7b
+*.p8
+*.cer
+*.csr
+*.gpg
+*.asc
+*.credentials
+*.token
+*.config
+*.bak
+*.old
+*.backup
+
+# Google Cloud/Firebase credentials
+*firebase-adminsdk-*.json
+*serviceAccount*.json
+*credentials*.json

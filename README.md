@@ -11,6 +11,47 @@
 - Interface moderne avec FlatLaf
 - Prise en charge du mode sombre/clair
 
+## 🔑 Configuration des secrets et variables d'environnement
+
+Certaines fonctionnalités (authentification Google, Firebase, etc.) nécessitent des clés/API et credentials qui **ne sont pas dans le dépôt** pour des raisons de sécurité.
+
+### 1. Fichier `.env`
+
+Crée un fichier `.env` à la racine du projet (ou dans `src/main/resources/` selon ton usage) à partir du modèle suivant :
+
+```env
+# env.example
+
+GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_SECRET=your-github-client-secret
+FIREBASE_API_KEY=your-firebase-api-key
+FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
+FIREBASE_PROJECT_ID=your-firebase-project-id
+FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
+FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
+FIREBASE_APP_ID=your-firebase-app-id
+FIREBASE_MEASUREMENT_ID=your-firebase-measurement-id
+```
+
+**Ne jamais commiter ce fichier `.env` avec des vraies valeurs sur GitHub.**
+
+### 2. Credentials Firebase Admin
+
+Pour les fonctionnalités d'administration Firebase côté serveur, place le fichier de credentials (ex: `gestionprojetsswing-firebase-adminsdk-xxxxxx.json`) dans le dossier approprié (`src/main/resources/` ou autre selon le code).  
+**Ce fichier ne doit jamais être commité.**
+
+- Pour obtenir ce fichier :  
+  - Va dans la [console Firebase](https://console.firebase.google.com/),  
+  - Paramètres du projet > Comptes de service > Générer une nouvelle clé privée.
+
+### 3. Nettoyage des secrets déjà committés
+
+Si tu as déjà commité des secrets, **change-les immédiatement** dans la console Google Cloud/Firebase/GitHub, puis réécris l'historique git si besoin (voir [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)).
+
+---
+
 ## 🏁 Point d'entrée
 
 Le programme principal est :
@@ -62,7 +103,7 @@ src/main/java/com/aemtechnology/gestionprojet/GestionProjetsSwing.java
 
 ## 📝 Configuration
 
-- **Aucune variable d'environnement n'est requise côté client.**
+- **Variables d'environnement obligatoires** : voir section [Configuration des secrets et variables d'environnement](#-configuration-des-secrets-et-variables-denvironnement)
 - Les identifiants de connexion sont à créer via l'interface (ou demander à un admin).
 - Les URLs du backend sont codées en dur dans le code source (`https://teamworkatmini-jira.onrender.com`).
 
